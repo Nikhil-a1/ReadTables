@@ -1,3 +1,9 @@
+
+/*
+    This file is the starting place where the entire app is initialised.
+    The Provider is used to connect the react and redux which is also provided store.
+    The store is created where reducer is passed to it.
+*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';

@@ -1,3 +1,9 @@
+/*
+  This file contains action creaters which return type and/or value.
+  These actions are dispatched from components and are sent to the reducer
+*/
+
+
 export const SET_TABLE_DATA = "SET_TABLE_DATA";
 export const GET_HEADERS = "GET_HEADERS";
 export const GET_ROWS = "GET_ROWS";

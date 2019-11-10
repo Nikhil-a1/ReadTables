@@ -1,5 +1,8 @@
+/*
+    This file contains reducer which takes in state and action.
+    This is the place where the actual data is modified using pure functions without state mutation.
+*/
 import * as actions from "../actions/actions"
-
 export const initialState = {
     data: [],
     rows: [],
@@ -33,9 +36,7 @@ export const reducer = (state = initialState, action) => {
             const rowsData = state.data[0].rowData;
             const idValues = Array.from(getIdValues(rowsData, id));
             const sortedValues = idValues.sort();
-            console.log(sortedValues);
             const sortedTable = getUpdatedTable(rowsData, sortedValues);
-            console.log(sortedTable);
             const columnHeaders = state.data[0].columnHeaders;
             const newTable = [
                 {
@@ -65,6 +66,7 @@ export const reducer = (state = initialState, action) => {
     }
 }
 
+// returns the sorted table
 const getUpdatedTable = (rows, sortedValues) => {
     let results = [];
     for (let i in sortedValues) {
@@ -80,6 +82,7 @@ const getUpdatedTable = (rows, sortedValues) => {
     return results;
 }
 
+// returns the values of the table based on the column property user clicked
 const getIdValues = (rowsData, id) => {
     let results = new Set();
     for (let i = 0; i < rowsData.length; i++) {
@@ -93,6 +96,7 @@ const getIdValues = (rowsData, id) => {
     return results;
 }
 
+// returns the matched the text present in the table
 const returnMatch = (rows, key) => {
     for (let i = 0; i < rows.length; i++) {
         let data = rows[i].data;

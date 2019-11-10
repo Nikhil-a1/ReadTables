@@ -1,3 +1,7 @@
+/* 
+    This file contains Createtable Component which contains the actual JSON data.
+    This data is passed to the CreateHeader, CreateRows and CreateTableColumn Component
+*/
 import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 import CreateRows from "../CreateRows/CreateRows";

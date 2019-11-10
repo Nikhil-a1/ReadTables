@@ -1,3 +1,9 @@
+
+/*
+    CreateRow component is used to create a row and the data is further passed to CreateTableColumn
+    as a prop to create a 'th' element and a 'searchText' prop is passed when user search query matches
+    with the table data
+*/
 import React, { Component } from "react";
 import CreateTableColumn from "../CreateTableColumn/CreateTableColumn";
 import { connect } from "react-redux";
