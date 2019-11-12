@@ -1,10 +1,3 @@
-
-/*
-    CreaterHeaders Component is called to create the headers of the table.
-    We listen for the click on the header and based on the which column user presses and sortable property
-    defined in column headers  we sort the column data
-
-*/
 import React, { Component } from "react";
 import * as actions from "../../store/actions/actions";
 import { connect } from "react-redux";

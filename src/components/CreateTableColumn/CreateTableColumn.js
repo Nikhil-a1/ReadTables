@@ -1,7 +1,3 @@
-/* 
-    CreateTableColumn component is used to create a 'th' and a prop searchedText is passed to this 
-    component that matches the searched text with the table and we highlight with separate styling
-*/
 import React, { Component } from "react";
 
 class CreateTableColumn extends Component {
@@ -10,8 +6,8 @@ class CreateTableColumn extends Component {
         if (this.props.rowData) {
             var column =
                 (
-                    this.props.searchedText === this.props.rowData.value ?
-                        <th style={{ color: "yellow" }}>
+                    this.props.matchingText === this.props.rowData.value ?
+                        <th style={{ color: "Blue" }}>
                             {this.props.rowData.value}
                         </th>
                         :

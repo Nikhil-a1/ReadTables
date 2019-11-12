@@ -1,16 +1,14 @@
-/* 
-    This file contains Createtable Component which contains the actual JSON data.
-    This data is passed to the CreateHeader, CreateRows and CreateTableColumn Component
-*/
-import React, { Component } from "react";
-import { Table } from "react-bootstrap";
-import CreateRows from "../CreateRows/CreateRows";
-import CreateHeaders from "../CreateHeaders/CreateHeaders";
+import React, { PureComponent } from "react";
+// import { Table } from "react-bootstrap";
+// import CreateRows from "../CreateRows/CreateRows";
+// import CreateHeaders from "../CreateHeaders/CreateHeaders";
+import CreateTableWithMarkers from "../CreateTableWithMarker/CreateTableWithMarker";
+import CreateTableWithOutMarkers from "../CreateTableWithOutMarker/CreateTableWithOutMarker";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/actions";
 import "./CreateTable.css"
 
-class CreateTable extends Component {
+class CreateTable extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -152,77 +150,41 @@ class CreateTable extends Component {
                     ]
                 }
             ],
-            isSearchPresent: false
+            isSearchPresent: false,
+            matchingText: null
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.setTableData(this.state.tableData)
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        if (nextProps.tableData !== this.state.tableData) {
-            this.setState({ tableData: nextProps.tableData });
-            return true;
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.matchingText !== this.props.matchingText) {
+            this.setState({
+                isSearchPresent: this.props.isSearchPresent,
+                matchingText: this.props.matchingText
+            });
         }
-        return false;
+        if(prevProps.tableData !== this.props.tableData) {
+            this.setState({tableData: this.props.tableData});
+        }
     }
 
-    highlightText = (text) => {
-        debugger;
-        console.log(text);
-    }
-
-    search = (value) => {
+    onInputChange = (value) => {
         this.props.search(value);
-        this.highlightText(this.props.list);
-        debugger;
-        this.props.setSearchPresent(true);
-        console.log(this.props.list);
     }
 
     render() {
         return (
             <div>
-                <input type="search" placeholder="search" onChange={(e) => { this.search(e.target.value) }} />
-                {this.props.isSearchPresent ?
-                    <Table id="table">
-                        <thead>
-                            <tr>
-                                {
-                                    this.state.tableData[0].columnHeaders.map((head, key = head.id) =>
-                                        <CreateHeaders key={key} headers={head} />
-                                    )
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.tableData[0].rowData.map((data, key = data.id) =>
-                                    <CreateRows searchedText={this.props.list} key={key} data={data} />
-                                )
-                            }
-                        </tbody>
-                    </Table>
+                <input type="search" placeholder="search" onChange={(e) => { this.onInputChange(e.target.value) }} />
+                {
+                    this.props.isSearchPresent ?
+                    <CreateTableWithMarkers matchingText={this.props.matchingText} tableData={this.state.tableData} />
                     :
-                    <Table id="table">
-                        <thead>
-                            <tr>
-                                {
-                                    this.state.tableData[0].columnHeaders.map((head, key = head.id) =>
-                                        <CreateHeaders key={key} headers={head} />
-                                    )
-                                }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.tableData[0].rowData.map((data, key = data.id) =>
-                                    <CreateRows key={key} data={data} />
-                                )
-                            }
-                        </tbody>
-                    </Table>}
+                    <CreateTableWithOutMarkers tableData={this.state.tableData} />
+                }
             </div>
         )
     }
@@ -231,7 +193,7 @@ class CreateTable extends Component {
 const mapStateToProps = (state) => {
     return {
         tableData: state.data,
-        list: state.searchList,
+        matchingText: state.matchingText,
         isSearchPresent: state.isSearchPresent
     }
 }
@@ -239,8 +201,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         setTableData: (data) => dispatch(actions.setTableData(data)),
-        search: (value) => dispatch(actions.search(value)),
-        setSearchPresent: (val) => dispatch(actions.setSearchPresent(val))
+        search: (value) => dispatch(actions.search(value))
     }
 }
 
