@@ -7,8 +7,8 @@ class CreateTableColumn extends Component {
             var column =
                 (
                     this.props.matchingText === this.props.rowData.value ?
-                        <td style={{ color: "Blue" }}>
-                            {this.props.rowData.value}
+                        <td style={{ color: "Red" }}>
+                            <b>{this.props.rowData.value}</b>
                         </td>
                         :
                         <td>
