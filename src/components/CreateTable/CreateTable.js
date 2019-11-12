@@ -1,14 +1,11 @@
-import React, { PureComponent } from "react";
-// import { Table } from "react-bootstrap";
-// import CreateRows from "../CreateRows/CreateRows";
-// import CreateHeaders from "../CreateHeaders/CreateHeaders";
+import React, { Component } from "react";
 import CreateTableWithMarkers from "../CreateTableWithMarker/CreateTableWithMarker";
-import CreateTableWithOutMarkers from "../CreateTableWithOutMarker/CreateTableWithOutMarker";
+// import CreateTableWithOutMarkers from "../CreateTableWithOutMarker/CreateTableWithOutMarker";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/actions";
-import "./CreateTable.css"
+import "./CreateTable.css";
 
-class CreateTable extends PureComponent {
+class CreateTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -166,8 +163,8 @@ class CreateTable extends PureComponent {
                 matchingText: this.props.matchingText
             });
         }
-        if(prevProps.tableData !== this.props.tableData) {
-            this.setState({tableData: this.props.tableData});
+        if (prevProps.tableData !== this.props.tableData) {
+            this.setState({ tableData: this.props.tableData });
         }
     }
 
@@ -178,13 +175,8 @@ class CreateTable extends PureComponent {
     render() {
         return (
             <div>
-                <input type="search" placeholder="search" onChange={(e) => { this.onInputChange(e.target.value) }} />
-                {
-                    this.props.isSearchPresent ?
-                    <CreateTableWithMarkers matchingText={this.props.matchingText} tableData={this.state.tableData} />
-                    :
-                    <CreateTableWithOutMarkers tableData={this.state.tableData} />
-                }
+                <input type="text" placeholder="search for a cell value" onChange={(e) => { this.onInputChange(e.target.value) }} />
+                <CreateTableWithMarkers matchingText={this.props.matchingText} tableData={this.state.tableData} />
             </div>
         )
     }

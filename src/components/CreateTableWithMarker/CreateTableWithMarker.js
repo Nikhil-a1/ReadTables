@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Table } from "react-bootstrap";
 import CreateRows from "../CreateRows/CreateRows";
 import CreateHeaders from "../CreateHeaders/CreateHeaders";
-import "../CreateTable/CreateTable.css"
+import "./CreateTableWithMarker.css"
 
 export default class CreateTableWithMarker extends Component {
     render() {

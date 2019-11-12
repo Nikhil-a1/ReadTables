@@ -1,32 +1,5 @@
-#tabel {
-    margin: 8px;
-    text-align: center;
-    border-collapse: collapse;
-    border: 3px solid #ddd;
-    width: 100%;
-}
-
-#table td, #table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-
-#table tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-
-#table tr:hover {
-    background-color: #ddd;
-}
-
-thead {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: skyblue;
-  color: white;
-}
-
 input {
-    margin: 8px
+    margin-top: 1%;
+    margin-left: 35%;
+    width: 25%
 }
